@@ -63,17 +63,26 @@ This dataset contains information on US domestic flights operated by large air c
 - AIR_TIME, DISTANCE: Flight duration and distance
   
 ### Enrichment Dataset: 
+
 NOAA Weather Data
+
 ***Collection Method***:
 I will use the Iowa Environmental Mesonet's custom data downloader to retrieve weather observations for the top 30 busiest US airports for 2015. The data will be requested in CSV format and downloaded programmatically using Python requests library.
 
 Source: [Iowa Environmental Mesonet - ASOS Network](https://mesonet.agron.iastate.edu/request/download.phtml?network=ASOS)
 
 **Description**:
+We will enrich our flight data with weather information from the Iowa Environmental Mesonet - ASOS Network for the following reasons:
+
+Weather observations come directly from airport weather stations, ensuring precise location matching
+Data includes hourly observations, allowing for time-specific correlation with flights
+Comprehensive weather variables that impact aviation operations
+Programmatic access for efficient data collection
 This dataset provides historical weather observations from Automated Surface Observing System (ASOS) stations located at airports across the United States, including:
 - Hourly weather measurements
 - Coverage for all major US airports
 - Matches the time period of the flight dataset (2015)
+  
 **Key Columns**:
 - `station`: Airport weather station identifier
 - `valid`: Timestamp of weather observation
