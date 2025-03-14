@@ -29,9 +29,11 @@ Fligh Delay and cancelation are common occurance that cause costly hinderance to
 
 ***Collection Method***:
 I will download the dataset directly from Kaggle, which sources this data from the U.S. Department of Transportation's Bureau of Transportation Statistics.
+
 Source: [Flight Delays and Cancellations on Kaggle](https://www.kaggle.com/datasets/usdot/flight-delays)
 
 **Description**:
+
 This dataset contains information on US domestic flights operated by large air carriers in 2015, including:
 - 5.8 million flight records over a full year (2015)
 - Flight dates, times, origins, and destinations
@@ -45,19 +47,26 @@ This dataset contains information on US domestic flights operated by large air c
 - The Dataset contains 40 columns
 
 **Key Columns**:
-- `YEAR`, `MONTH`, `DAY`, `DAY_OF_WEEK`: Flight date information
-- `AIRLINE`, `FLIGHT_NUMBER`: Carrier identification
-- `ORIGIN_AIRPORT`, `DESTINATION_AIRPORT`: Airport codes
-- `SCHEDULED_DEPARTURE`, `DEPARTURE_TIME`, `DEPARTURE_DELAY`: Departure information
-- `SCHEDULED_ARRIVAL`, `ARRIVAL_TIME`, `ARRIVAL_DELAY`: Arrival information
+- YEAR, MONTH, DAY: Date of flight
+- DAY_OF_WEEK: Day of week (1-7)
+- AIRLINE: Two-letter airline code
+- FLIGHT_NUMBER: Flight number
+- TAIL_NUMBER: Aircraft identifier
+- ORIGIN_AIRPORT, DESTINATION_AIRPORT: Airport codes
+- SCHEDULED_DEPARTURE, DEPARTURE_TIME: Scheduled and actual departure times
+- DEPARTURE_DELAY: Minutes of departure delay
+- SCHEDULED_ARRIVAL, ARRIVAL_TIME: Scheduled and actual arrival times
+- ARRIVAL_DELAY: Minutes of arrival delay
 - CANCELLED: Whether the flight was cancelled (1 = cancelled)
 - CANCELLATION_REASON: Reason for cancellation (A = airline, B = weather, C = NAS, D = security)
-- `AIR_SYSTEM_DELAY`, `SECURITY_DELAY`, `AIRLINE_DELAY`, `LATE_AIRCRAFT_DELAY`, `WEATHER_DELAY`: Categorized delay reasons
-- `DISTANCE`: Flight distance in miles
-
-### Enrichment Dataset: NOAA Weather Data
+- DIVERTED: Whether the flight was diverted
+- AIR_TIME, DISTANCE: Flight duration and distance
+  
+### Enrichment Dataset: 
+NOAA Weather Data
 ***Collection Method***:
 I will use the Iowa Environmental Mesonet's custom data downloader to retrieve weather observations for the top 30 busiest US airports for 2015. The data will be requested in CSV format and downloaded programmatically using Python requests library.
+
 Source: [Iowa Environmental Mesonet - ASOS Network](https://mesonet.agron.iastate.edu/request/download.phtml?network=ASOS)
 
 **Description**:
