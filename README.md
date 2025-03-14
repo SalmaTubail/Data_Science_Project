@@ -14,23 +14,34 @@ Fligh Delay and cancelation are common occurance that cause costly hinderance to
 
 ## Objectives:
 1. Identify the most delay-prone airports, routes, and carriers
-2. Identify the most infulential weather conditions regarding flight delays
-3. Compare how different airlines and airports handle similar weather conditions
-4. Develop predictive models to estimate delay probabilities based on weather forecasts
-5. Visualize relationships and correlations between weather variables and delay durations
-6. Analyze seasonal patterns in weather-related delays to make recommendations for best travel times for travelers.
+2. Identify the least and most delay-prone airports
+3. Find the most infulential weather conditions regarding flight delays
+4. Compare how different airlines and airports handle similar weather conditions
+5. Develop predictive models to estimate delay probabilities based on weather forecasts
+6. Visualize relationships and correlations between weather variables and delay durations 
+7. Analyze seasonal patterns in weather-related delays to make recommendations for best travel times for travelers.
   
 ## Data 
 
-### Primary Dataset: US Flight Delay and Cancellation Data
-**Source**: [Flight Delays and Cancellations on Kaggle](https://www.kaggle.com/datasets/usdot/flight-delays)
+### Primary Dataset 
+
+2015 Flight Delays and Cancellations
+
+***Collection Method***:
+I will download the dataset directly from Kaggle, which sources this data from the U.S. Department of Transportation's Bureau of Transportation Statistics.
+Source: [Flight Delays and Cancellations on Kaggle](https://www.kaggle.com/datasets/usdot/flight-delays)
 
 **Description**:
 This dataset contains information on US domestic flights operated by large air carriers in 2015, including:
-- 5.8 million flight records
-- Covers all major US airports and carriers
-- Comprehensive temporal coverage (full year of 2015)
-- Consists of catageroical data such as and numerical data like
+- 5.8 million flight records over a full year (2015)
+- Flight dates, times, origins, and destinations
+- Consists of numerical data, such as:
+    - Flight distance
+    - Actual departure and arrival times
+    - Scheduled departure and arrival times
+- Consists of catageroical data, such as:
+    - Delay durations categorized by reason
+    - Cancellation information and reasons
 - The Dataset contains 40 columns
 
 **Key Columns**:
@@ -39,15 +50,15 @@ This dataset contains information on US domestic flights operated by large air c
 - `ORIGIN_AIRPORT`, `DESTINATION_AIRPORT`: Airport codes
 - `SCHEDULED_DEPARTURE`, `DEPARTURE_TIME`, `DEPARTURE_DELAY`: Departure information
 - `SCHEDULED_ARRIVAL`, `ARRIVAL_TIME`, `ARRIVAL_DELAY`: Arrival information
-- `CANCELLED`, `CANCELLATION_REASON`: Cancellation details
+- CANCELLED: Whether the flight was cancelled (1 = cancelled)
+- CANCELLATION_REASON: Reason for cancellation (A = airline, B = weather, C = NAS, D = security)
 - `AIR_SYSTEM_DELAY`, `SECURITY_DELAY`, `AIRLINE_DELAY`, `LATE_AIRCRAFT_DELAY`, `WEATHER_DELAY`: Categorized delay reasons
 - `DISTANCE`: Flight distance in miles
 
-**Collection Method**:
-I will download the dataset directly from Kaggle, which sources this data from the U.S. Department of Transportation's Bureau of Transportation Statistics.
-
 ### Enrichment Dataset: NOAA Weather Data
-**Source**: [Iowa Environmental Mesonet - ASOS Network](https://mesonet.agron.iastate.edu/request/download.phtml?network=ASOS)
+***Collection Method***:
+I will use the Iowa Environmental Mesonet's custom data downloader to retrieve weather observations for the top 30 busiest US airports for 2015. The data will be requested in CSV format and downloaded programmatically using Python requests library.
+Source: [Iowa Environmental Mesonet - ASOS Network](https://mesonet.agron.iastate.edu/request/download.phtml?network=ASOS)
 
 **Description**:
 This dataset provides historical weather observations from Automated Surface Observing System (ASOS) stations located at airports across the United States, including:
@@ -69,9 +80,6 @@ This dataset provides historical weather observations from Automated Surface Obs
 - `wxcodes`: Present weather codes
 - `metar`: Raw METAR data (meteorological aerodrome report)
 
-**Collection Method**:
-I will use the Iowa Environmental Mesonet's custom data downloader to retrieve weather observations for the top 30 busiest US airports for 2015. The data will be requested in CSV format and downloaded programmatically using Python requests library.
-
 ## Data Enhancement Strategy
 The primary enhancement will involve merging flight and weather data through:
 
@@ -87,11 +95,6 @@ The primary enhancement will involve merging flight and weather data through:
    - Incorporating airport capacity information
    - Including holiday and special event indicators
 
-### Expected Outcomes:
-1. A predictive model that can estimate delay probability based on weather conditions
-2. Insights into which airports are most vulnerable to specific weather conditions
-3. Recommendations for optimizing flight scheduling during adverse weather
-4. Visual analysis of weather impact patterns across the US aviation network
 
 ## Implementation Timeline
 - **By March 18**: Complete data collection, cleaning, and preliminary EDA
