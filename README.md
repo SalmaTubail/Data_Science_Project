@@ -13,30 +13,13 @@ Fligh Delay and cancelation are common occurance that cause costly hinderance to
 4. The industry could potentially reduce the economic impact of weather-related disruptions
 
 ## Objectives:
-1. Identify the most infulential weather conditions regarding flight delays
-2. Develop predictive models to predict delay probabilities based on weather forecasts
+1. Identify the most delay-prone airports, routes, and carriers
+2. Identify the most infulential weather conditions regarding flight delays
 3. Compare how different airlines and airports handle similar weather conditions
-4. Analyze seasonal patterns in weather-related delays
-5. Identify the most delay-prone airports, routes, and carriers
-Analyze seasonal and diurnal patterns in delays
-Visualize relationships between weather variables and delay durations
-
-Calculate correlations between specific weather conditions and delay types
-Perform hypothesis testing to validate relationships
-Identify threshold values in weather parameters that significantly increase delay probabilities
-
-
-Create classification models for delay risk categories (minimal, moderate, severe)
-Evaluate model performance using appropriate metrics
-
-
-Deliverables
-
-Interactive dashboard visualizing key findings
-Report detailing significant weather-delay relationships
-Predictive tools for estimating delay risks based on weather conditions
-Recommendations for travelers on best times/seasons to minimize weather-related delays
-
+4. Develop predictive models to estimate delay probabilities based on weather forecasts
+5. Visualize relationships and correlations between weather variables and delay durations
+6. Analyze seasonal patterns in weather-related delays to make recommendations for best travel times for travelers.
+  
 ## Data 
 
 ### Primary Dataset: US Flight Delay and Cancellation Data
