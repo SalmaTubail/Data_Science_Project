@@ -1,5 +1,5 @@
 # Data_Science_Project
-# An Analysis of Flight Delays and Cancelations with Weather Conditions
+# Behavioural Analysis of Brazilian ecommerce customers.
 
 ## Project Overview
 This project will explore how weather conditions affect flight delays and cancellations across US airports. I aim to develop predictive models to forecast unforeseen delays or cancellations in flights by examining flight peformance data including Schedualed departure time, actual departure time, reason for cacellation, etc... with detailed weather observations such as visibility, temperature, and wind speed. The purpose of this analysis is to highlight the correlations and patterns of the weather conditions which are most disruptive to air travel and identify how their effects vary by airport, airline, and season, to aid airlines and travelers in anticipating delays.
