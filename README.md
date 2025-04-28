@@ -1,138 +1,117 @@
-# Data_Science_Project
-# Behavioural Analysis of Brazilian ecommerce customers.
+# Brazilian E-commerce Market Analysis
 
 ## Project Overview
-This project will explore how weather conditions affect flight delays and cancellations across US airports. I aim to develop predictive models to forecast unforeseen delays or cancellations in flights by examining flight peformance data including Schedualed departure time, actual departure time, reason for cacellation, etc... with detailed weather observations such as visibility, temperature, and wind speed. The purpose of this analysis is to highlight the correlations and patterns of the weather conditions which are most disruptive to air travel and identify how their effects vary by airport, airline, and season, to aid airlines and travelers in anticipating delays.
+This data science project analyzes Brazilian e-commerce patterns using the Olist dataset alongside macroeconomic indicators to uncover relationships between economic factors and e-commerce behavior in Brazil.
 
-## Motivation
-Fligh Delay and cancelation are common occurance that cause costly hinderance to both travelers and airlines. Everytime I hear of a flight cancellation it has always been due to "Bad Waether". Although there are several factors contibuting to flight delay weather remains the most prominent factor. By understanding the relationship between specific weather conditions and flight performance: 
+## Motivation and Goals
+The Brazilian e-commerce market has experienced significant growth over recent years, becoming one of Latin America's largest digital marketplaces. This project aims to:
 
-1. Airlines could better anticipate and mitigate delays
-2. Airports could optimize resource allocation during adverse weather
-3. Create tools so that passengers could make more informed travel decisions
-4. The industry could potentially reduce the economic impact of weather-related disruptions
+- Understand the dynamics of Brazil's e-commerce ecosystem
+- Identify correlations between economic indicators and purchasing patterns
+- Develop predictive models for sales trends based on economic conditions
+- Create actionable insights for businesses operating in the Brazilian market
+- Explore regional differences in e-commerce adoption across Brazil
 
-## Objectives:
-1. Identify the most delay-prone airports, routes, and carriers
-2. Identify the least and most delay-prone airports
-3. Find the most infulential weather conditions regarding flight delays
-4. Compare how different airlines and airports handle similar weather conditions
-5. Develop predictive models to estimate delay probabilities based on weather forecasts
-6. Visualize relationships and correlations between weather variables and delay durations 
-7. Analyze seasonal patterns in weather-related delays to make recommendations for best travel times for travelers.
-  
-## Data 
+## Data Sources
 
-### Primary Dataset 
+### Primary Dataset
+- **Olist Brazilian E-commerce Dataset**: A comprehensive collection of data from orders made at Olist Store.
+- **Source**: [Kaggle - Brazilian E-commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+- **Content**: ~100,000 orders from 2016 to 2018 across multiple marketplaces in Brazil
 
-2015 Flight Delays and Cancellations
+### Enrichment Data
+- **Trading Economics Brazil Indicators**: Macroeconomic indicators for Brazil
+- **Source**: [Trading Economics - Brazil Indicators](https://tradingeconomics.com/brazil/indicators)
+- **Content**: Economic metrics including inflation rates, consumer confidence, GDP growth, unemployment figures, and interest rates
 
-***Collection Method***:
-I will download the dataset directly from Kaggle, which sources this data from the U.S. Department of Transportation's Bureau of Transportation Statistics.
+## Dataset Details
 
-Source: [Flight Delays and Cancellations on Kaggle](https://www.kaggle.com/datasets/usdot/flight-delays)
+### Olist Dataset Structure
+The Olist dataset contains the following key tables:
 
-**Description**:
+1. **olist_customers_dataset**: Customer information and location
+   - `customer_id`, `customer_unique_id`, `customer_zip_code_prefix`, `customer_city`, `customer_state`
 
-This dataset contains information on US domestic flights operated by large air carriers in 2015, including:
-- 5.8 million flight records over a full year (2015)
-- Flight dates, times, origins, and destinations
-- Consists of numerical data, such as:
-    - Flight distance
-    - Actual departure and arrival times
-    - Scheduled departure and arrival times
-- Consists of catageroical data, such as:
-    - Delay durations categorized by reason
-    - Cancellation information and reasons
-- The Dataset contains 40 columns
+2. **olist_orders_dataset**: Order information including status and timestamps
+   - `order_id`, `customer_id`, `order_status`, `order_purchase_timestamp`, `order_approved_at`, `order_delivered_carrier_date`, `order_delivered_customer_date`, `order_estimated_delivery_date`
 
-**Key Columns**:
-- YEAR, MONTH, DAY: Date of flight
-- DAY_OF_WEEK: Day of week (1-7)
-- AIRLINE: Two-letter airline code
-- FLIGHT_NUMBER: Flight number
-- TAIL_NUMBER: Aircraft identifier
-- ORIGIN_AIRPORT, DESTINATION_AIRPORT: Airport codes
-- SCHEDULED_DEPARTURE, DEPARTURE_TIME: Scheduled and actual departure times
-- DEPARTURE_DELAY: Minutes of departure delay
-- SCHEDULED_ARRIVAL, ARRIVAL_TIME: Scheduled and actual arrival times
-- ARRIVAL_DELAY: Minutes of arrival delay
-- CANCELLED: Whether the flight was cancelled (1 = cancelled)
-- CANCELLATION_REASON: Reason for cancellation (A = airline, B = weather, C = NAS, D = security)
-- DIVERTED: Whether the flight was diverted
-- AIR_TIME, DISTANCE: Flight duration and distance
-  
-### Enrichment Dataset: 
+3. **olist_order_items_dataset**: Items included in orders with pricing
+   - `order_id`, `order_item_id`, `product_id`, `seller_id`, `shipping_limit_date`, `price`, `freight_value`
 
-NOAA Weather Data
+4. **olist_products_dataset**: Product details and categorization
+   - `product_id`, `product_category_name`, `product_name_length`, `product_description_length`, `product_photos_qty`, `product_weight_g`, `product_length_cm`, `product_height_cm`, `product_width_cm`
 
-***Collection Method***:
-I will use the Iowa Environmental Mesonet's custom data downloader to retrieve weather observations for the top 30 busiest US airports for 2015. The data will be requested in CSV format and downloaded programmatically using Python requests library.
+5. **olist_sellers_dataset**: Seller information and location
+   - `seller_id`, `seller_zip_code_prefix`, `seller_city`, `seller_state`
 
-Source: [Iowa Environmental Mesonet - ASOS Network](https://mesonet.agron.iastate.edu/request/download.phtml?network=ASOS)
+6. **olist_geolocation_dataset**: Geographic data for mapping
+   - `geolocation_zip_code_prefix`, `geolocation_lat`, `geolocation_lng`, `geolocation_city`, `geolocation_state`
 
-**Description**:
-We will enrich our flight data with weather information from the Iowa Environmental Mesonet - ASOS Network for the following reasons:
+7. **olist_order_payments_dataset**: Payment information
+   - `order_id`, `payment_sequential`, `payment_type`, `payment_installments`, `payment_value`
 
-Weather observations come directly from airport weather stations, ensuring precise location matching
-Data includes hourly observations, allowing for time-specific correlation with flights
-Comprehensive weather variables that impact aviation operations
-Programmatic access for efficient data collection
-This dataset provides historical weather observations from Automated Surface Observing System (ASOS) stations located at airports across the United States, including:
-- Hourly weather measurements
-- Coverage for all major US airports
-- Matches the time period of the flight dataset (2015)
-  
-**Key Columns**:
-- `station`: Airport weather station identifier
-- `valid`: Timestamp of weather observation
-- `tmpf`: Temperature (Fahrenheit)
-- `dwpf`: Dew point temperature (Fahrenheit)
-- `relh`: Relative humidity (%)
-- `drct`: Wind direction (degrees)
-- `sknt`: Wind speed (knots)
-- `p01i`: 1-hour precipitation (inches)
-- `vsby`: Visibility (miles)
-- `gust`: Wind gust (knots)
-- `skyc1`, `skyc2`: Sky condition (cloud cover)
-- `wxcodes`: Present weather codes
-- `metar`: Raw METAR data (meteorological aerodrome report)
+8. **olist_order_reviews_dataset**: Customer reviews
+   - `review_id`, `order_id`, `review_score`, `review_comment_title`, `review_comment_message`, `review_creation_date`, `review_answer_timestamp`
 
-## Data Enhancement Strategy
-The primary enhancement will involve merging flight and weather data through:
+9. **product_category_name_translation**: English translation of category names
+   - `product_category_name`, `product_category_name_english`
 
-1. **Temporal Matching**: Connecting flight departure times with the closest weather observations
-2. **Spatial Matching**: Linking airport codes (e.g., 'ORD' for Chicago O'Hare) with their corresponding weather station identifiers (e.g., 'KORD')
-3. **Feature Engineering**: Creating derived features such as:
-   - Weather severity indices
-   - Seasonal indicators
-   - Time-based features (peak travel hours, holidays)
-   - Airport congestion metrics
-4. **Additional Context**:
-   - Adding airport geographical data (latitude/longitude)
-   - Incorporating airport capacity information
-   - Including holiday and special event indicators
+### Data Enhancement Plan
+I plan to enhance the Olist dataset in several ways:
 
+1. **Temporal Economic Context**: Merge the e-commerce transaction data with time-aligned economic indicators from Trading Economics:
+   - Inflation rates
+   - Unemployment figures
+   - Consumer confidence index
+   - Interest rates
+   - GDP growth
+   - Exchange rates
 
-## Implementation Timeline
-- **By March 18**: Complete data collection, cleaning, and preliminary EDA
-- **By April 23**: Implement machine learning models for delay prediction
-- **By May 30**: Finalize analysis, prepare visualizations, and complete documentation
+2. **Geographic Enrichment**:
+   - Add socioeconomic data for different Brazilian regions
+   - Include population density information
+   - Incorporate internet penetration rates by region
 
-## limitations and Considerations
-- Weather is just one factor among many that contribute to flight delays
-- Historical patterns may not perfectly predict future performance due to climate change
-- Airport infrastructure and airline policies regarding weather conditions vary
-- Data quality issues may exist in both flight and weather datasets
+3. **Calculated Features**:
+   - Create seasonality indicators
+   - Calculate customer lifetime value
+   - Derive price elasticity metrics
+   - Develop seller performance indicators
+
+## Project Objectives
+
+### Primary Objectives
+1. **Economic Impact Analysis**: Determine how macroeconomic factors affect e-commerce purchasing patterns
+2. **Regional Variation Study**: Identify geographic differences in e-commerce behavior across Brazil
+3. **Temporal Trends**: Analyze how e-commerce has evolved during the observed period (2016-2018)
+4. **Predictive Modeling**: Create models to forecast sales based on economic indicators
+
+### Business Questions to Answer
+- How do economic downturns impact different product categories?
+- Are certain regions more resistant to economic fluctuations in their e-commerce behavior?
+- What is the relationship between consumer confidence and average order value?
+- How do interest rates impact payment installment choices?
+- Can regional economic disparities explain differences in product preferences?
+
+## Methodology Overview
+1. Data preprocessing and integration
+2. Exploratory data analysis
+3. Feature engineering
+4. Statistical analysis of relationships
+5. Time series analysis
+6. Predictive modeling
+7. Visualization and reporting
 
 ## Future Work
-- Expand the analysis to multiple years to identify long-term trends
-- Incorporate real-time weather forecasting data for operational predictions
-- Develop a web-based tool for delay risk assessment
-- Include economic impact analysis of weather-related delays
+- Extend the analysis with more recent data
+- Incorporate text analysis of product reviews
+- Develop interactive dashboards for business intelligence
+- Compare Brazilian e-commerce patterns with other Latin American markets
 
-## References
-1. Bureau of Transportation Statistics. "Understanding the Reporting of Causes of Flight Delays and Cancellations."
-2. Federal Aviation Administration. "Weather Delay Cost."
-3. NOAA National Centers for Environmental Information. "Data Access."
+## Contact Information
+For questions or collaboration opportunities, please reach out at [your-email@example.com].
 
+## Acknowledgments
+- Olist for providing the e-commerce dataset
+- Trading Economics for economic indicator data
+- Kaggle community for support and inspiration
