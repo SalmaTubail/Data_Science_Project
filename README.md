@@ -1,7 +1,8 @@
 # Brazilian E-commerce Market Analysis
 
 ## Project Overview
-This data science project analyzes Brazilian e-commerce patterns using the Olist dataset alongside macroeconomic indicators to uncover relationships between economic factors and e-commerce behavior in Brazil.
+This project analyzes customer reviews and behaviuor patterns in the Brazilian e-commerce market using the Olist e-commerce platform dataset alongside macroeconomic indicators. This analysis aims to uncover which 
+have the greatest impact on customer revirewsrelationships between economic factors and e-commerce behavior in Brazil.
 
 ## Motivation and Goals
 The Brazilian e-commerce market has experienced significant growth over recent years, becoming one of Latin America's largest digital marketplaces. This project aims to:
