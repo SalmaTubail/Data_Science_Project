@@ -58,7 +58,7 @@ The Olist dataset contains the following key tables:
    - `product_category_name`, `product_category_name_english`
 
 ### Data Enhancement Plan
-I plan to enhance the Olist dataset in several ways:
+I plan to enhance the Olist dataset (2016-2018) in several ways using Brazilian Economic indicatprs congruent to the period that the Olist data set was collected (2016-2018). I chose this particular enriching data since Between 2000 and 2014, Brazil was in an economic boom. However, the commodity-driven growth proved volatile, leading to The 2014-2016 economic recession, followed by a slow recovery, resulted in a slowdown of the GDP growth in the years before the pandemic. Hence, the purpose of this enrichment is to map the relation of the period of slow recovery in the BRazillian economy with the Olist Brazillian Ecommerce data, which coincides during the same period:
 
 1. **Temporal Economic Context**: Merge the e-commerce transaction data with time-aligned economic indicators from Trading Economics:
    - Inflation rates
